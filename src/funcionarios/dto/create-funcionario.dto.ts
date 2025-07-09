@@ -3,11 +3,11 @@ import { IsString, IsEmail, IsNotEmpty, IsInt, MinLength } from 'class-validator
 export class CreateFuncionarioDto{
     @IsString()
     @IsNotEmpty()
-    nome: String
+    nome: string
    
     @IsNotEmpty()  
     @IsEmail()  
-    email: String
+    email: string
     @IsString()
   @IsNotEmpty()
   @MinLength(11, { message: 'CPF deve ter no mínimo 11 caracteres (apenas números).' }) 
