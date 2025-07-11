@@ -5,6 +5,7 @@ import { FuncionariosController } from './funcionarios/funcionarios.controller';
 import { FuncionariosService } from './funcionarios/funcionarios.service';
 import { FuncionariosModule } from './funcionarios/funcionarios.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { RegistroPontoModule } from './registro-ponto/registro-ponto.module';
 
 @Module({
   imports: [
@@ -17,7 +18,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       autoLoadEntities: true,
       synchronize: true
     }),
-    FuncionariosModule
+    FuncionariosModule,
+    RegistroPontoModule
   ],
   controllers: [AppController, FuncionariosController],
   providers: [AppService, FuncionariosService],

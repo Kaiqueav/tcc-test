@@ -41,4 +41,10 @@ export class FuncionariosService {
       throw new NotFoundException(`Funcionario with ID "${id}" not found.`);
     }
   }
+
+    async exists(id: number): Promise<boolean> {
+    const count = await this.funcionarioRepository.count({ where: { id } });
+    return count > 0;
+  }
+
 }
