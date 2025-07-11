@@ -17,6 +17,11 @@ export class CreateFuncionarioDto{
   @IsNotEmpty()
   admissao: string; 
 
+  
+   @IsString() 
+  @IsNotEmpty()
+  cargo: string; 
+
   @IsInt()
   @IsNotEmpty()
   carga_horaria: number;

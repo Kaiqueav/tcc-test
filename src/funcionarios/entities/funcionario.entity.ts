@@ -21,12 +21,21 @@ import { RegistroPonto } from '../../registro-ponto/entities/registro-ponto-enti
 
     @Column({ type: 'int' })
     carga_horaria: number;
-      
+     
+
+    @Column({ unique: true, length: 100 })
+    email: string;
+
+    
+    @Column({ length: 100 })
+    cargo: string;
 
   // Relationships
   @OneToMany(() => RegistroPonto, (registroPonto) => registroPonto.funcionario)
   registrosPonto: RegistroPonto[];
 
+}
+/*
   @OneToMany(() => HorarioTrabalho, (horarioTrabalho) => horarioTrabalho.funcionario)
   horariosTrabalho: HorarioTrabalho[];
 
@@ -38,4 +47,4 @@ import { RegistroPonto } from '../../registro-ponto/entities/registro-ponto-enti
 
   @OneToMany(() => Relatorio, (relatorio) => relatorio.funcionario)
   relatorios: Relatorio[];
- }
+ }*/
