@@ -6,6 +6,7 @@ import { FuncionariosService } from './funcionarios/funcionarios.service';
 import { FuncionariosModule } from './funcionarios/funcionarios.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { RegistroPontoModule } from './registro-ponto/registro-ponto.module';
+import { HorarioIntervaloModule } from './horario-intervalo/horario-intervalo.module';
 
 @Module({
   imports: [
@@ -19,7 +20,8 @@ import { RegistroPontoModule } from './registro-ponto/registro-ponto.module';
       synchronize: true
     }),
     FuncionariosModule,
-    RegistroPontoModule
+    RegistroPontoModule,
+    HorarioIntervaloModule
   ],
   controllers: [AppController, FuncionariosController],
   providers: [AppService, FuncionariosService],
