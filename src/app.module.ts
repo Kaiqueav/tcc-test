@@ -7,6 +7,8 @@ import { FuncionariosModule } from './funcionarios/funcionarios.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { RegistroPontoModule } from './registro-ponto/registro-ponto.module';
 import { HorarioIntervaloModule } from './horario-intervalo/horario-intervalo.module';
+import { HorarioTrabalhoModule } from './horario-trabalho/horario-trabalho.module';
+import { HorarioTrablhoController } from './horario-trablho/horario-trablho.controller';
 
 @Module({
   imports: [
@@ -21,9 +23,10 @@ import { HorarioIntervaloModule } from './horario-intervalo/horario-intervalo.mo
     }),
     FuncionariosModule,
     RegistroPontoModule,
-    HorarioIntervaloModule
+    HorarioIntervaloModule,
+    HorarioTrabalhoModule
   ],
-  controllers: [AppController, FuncionariosController],
+  controllers: [AppController, FuncionariosController, HorarioTrablhoController],
   providers: [AppService, FuncionariosService],
 })
 export class AppModule {}
