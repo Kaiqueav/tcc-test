@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 import { RegistroPonto } from '../../registro-ponto/entities/registro-ponto-entity';
-//import { HorarioTrabalho } from '../horario-trabalho/horario-trabalho.entity';
-//import { HorarioIntervalo } from '../horario-intervalo/horario-intervalo.entity';
+//import { HorarioTrabalho } from '../../horario-trabalho/horario-trabalho.entity';
+import { HorarioIntervalo } from '../../horario-intervalo/entities/horario-intervalo-entity';
 //import { BancoHoras } from '../banco-horas/banco-horas.entity';
 //import { Relatorio } from '../relatorio/relatorio.entity';
 
@@ -34,13 +34,15 @@ import { RegistroPonto } from '../../registro-ponto/entities/registro-ponto-enti
   @OneToMany(() => RegistroPonto, (registroPonto) => registroPonto.funcionario)
   registrosPonto: RegistroPonto[];
 
+  @OneToMany(() => HorarioIntervalo, (horarioIntervalo) => horarioIntervalo.funcionario)
+ horariosIntervalo: HorarioIntervalo[];
 }
+ 
 /*
   @OneToMany(() => HorarioTrabalho, (horarioTrabalho) => horarioTrabalho.funcionario)
   horariosTrabalho: HorarioTrabalho[];
 
-  @OneToMany(() => HorarioIntervalo, (horarioIntervalo) => horarioIntervalo.funcionario)
-  horariosIntervalo: HorarioIntervalo[];
+
 
   @OneToMany(() => BancoHoras, (bancoHoras) => bancoHoras.funcionario)
   bancoHoras: BancoHoras[];
