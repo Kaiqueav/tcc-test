@@ -3,6 +3,7 @@ import { RegistroPonto } from '../../registro-ponto/entities/registro-ponto-enti
 import { HorarioIntervalo } from '../../horario-intervalo/entities/horario-intervalo-entity';
 import { HorarioTrabalho } from "src/horario-trabalho/entities/horario-trabalho.entity";
 import { BancoHoras } from "src/banco-horas/entities/banco-horas.entity";
+import { Relatorio } from "src/banco-horas/entities/relatorio.entity";
 //import { BancoHoras } from '../banco-horas/banco-horas.entity';
 //import { Relatorio } from '../relatorio/relatorio.entity';
 
@@ -41,6 +42,8 @@ import { BancoHoras } from "src/banco-horas/entities/banco-horas.entity";
   horariosTrabalho: HorarioTrabalho[];
   @OneToMany(() => BancoHoras, (bancoHoras) => bancoHoras.funcionario)
   bancoHoras: BancoHoras[];
+   @OneToMany(() => Relatorio, (relatorio) => relatorio.funcionario)
+  relatorios: Relatorio[];
 }
  
 /*
@@ -50,6 +53,5 @@ import { BancoHoras } from "src/banco-horas/entities/banco-horas.entity";
 
   
 
-  @OneToMany(() => Relatorio, (relatorio) => relatorio.funcionario)
-  relatorios: Relatorio[];
+ 
  }*/

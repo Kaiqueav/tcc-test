@@ -25,5 +25,6 @@ export class HorarioTrabalho{
     })
     @JoinColumn({name: 'funcionario_id'})
         funcionario: Funcionario
+    hora_saida: any;
     
 }
