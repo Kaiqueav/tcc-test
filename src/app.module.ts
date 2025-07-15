@@ -9,6 +9,8 @@ import { RegistroPontoModule } from './registro-ponto/registro-ponto.module';
 import { HorarioIntervaloModule } from './horario-intervalo/horario-intervalo.module';
 import { HorarioTrabalhoModule } from './horario-trabalho/horario-trabalho.module';
 import { HorarioTrablhoController } from './horario-trablho/horario-trablho.controller';
+import { BancoHorasModule } from './banco-horas/banco-horas.module';
+import { RelatoriosModule } from './relatorios/relatorios.module';
 
 @Module({
   imports: [
@@ -24,7 +26,9 @@ import { HorarioTrablhoController } from './horario-trablho/horario-trablho.cont
     FuncionariosModule,
     RegistroPontoModule,
     HorarioIntervaloModule,
-    HorarioTrabalhoModule
+    HorarioTrabalhoModule,
+    BancoHorasModule,
+    RelatoriosModule
   ],
   controllers: [AppController, FuncionariosController, HorarioTrablhoController],
   providers: [AppService, FuncionariosService],
