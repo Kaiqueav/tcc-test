@@ -24,6 +24,6 @@ export class RegistroPonto{
   @Column({ length: 20 }) // 'entrada', 'saida', 'intervalo_inicio', 'intervalo_fim'
   tipo: string;
 
-  @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  @CreateDateColumn()
   createdAt: Date; // Timestamp for when the record was *created* in the system
 }

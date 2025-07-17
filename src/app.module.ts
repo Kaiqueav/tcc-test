@@ -8,9 +8,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { RegistroPontoModule } from './registro-ponto/registro-ponto.module';
 import { HorarioIntervaloModule } from './horario-intervalo/horario-intervalo.module';
 import { HorarioTrabalhoModule } from './horario-trabalho/horario-trabalho.module';
-import { HorarioTrablhoController } from './horario-trablho/horario-trablho.controller';
 import { BancoHorasModule } from './banco-horas/banco-horas.module';
 import { RelatoriosModule } from './relatorios/relatorios.module';
+import { HorarioTrabalhoController } from './horario-trabalho/horario-trabalho.controller';
 
 @Module({
   imports: [
@@ -20,6 +20,7 @@ import { RelatoriosModule } from './relatorios/relatorios.module';
       port:3306,
       username:'myuser',
       password: 'mypassword',
+      database: 'controle_ponto',
       autoLoadEntities: true,
       synchronize: true
     }),
@@ -30,7 +31,7 @@ import { RelatoriosModule } from './relatorios/relatorios.module';
     BancoHorasModule,
     RelatoriosModule
   ],
-  controllers: [AppController, FuncionariosController, HorarioTrablhoController],
+  controllers: [AppController, FuncionariosController, HorarioTrabalhoController],
   providers: [AppService, FuncionariosService],
 })
 export class AppModule {}

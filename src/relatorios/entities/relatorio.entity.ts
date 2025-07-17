@@ -1,5 +1,5 @@
 import { Funcionario } from "src/funcionarios/entities/funcionario.entity";
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity('relatorios')
 export class Relatorio{
@@ -15,8 +15,13 @@ export class Relatorio{
 
     @Column()
     funcionario_id: number;
+
     @ManyToOne(() => Funcionario, (funcionario) => funcionario.relatorios)
     @JoinColumn({ name: 'funcionario_id' })
     funcionario: Funcionario;
+
+    
+    @UpdateDateColumn()
+    ultima_atualizacao: Date;
 
 }

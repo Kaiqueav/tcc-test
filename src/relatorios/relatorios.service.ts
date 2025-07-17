@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import puppeteer from 'puppeteer';
 import { BancoHorasService } from 'src/banco-horas/banco-horas.service';
-import { Relatorio } from 'src/banco-horas/entities/relatorio.entity';
+import { Relatorio } from 'src/relatorios/entities/relatorio.entity';
 import { FuncionariosService } from 'src/funcionarios/funcionarios.service';
 import { RegistroPontoService } from 'src/registro-ponto/registro-ponto.service';
 import { Repository } from 'typeorm';

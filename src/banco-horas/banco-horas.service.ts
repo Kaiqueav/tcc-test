@@ -18,9 +18,6 @@ constructor(
     private readonly horarioTrabalhoService: HorarioTrabalhoService,
   ) {}
 
-  /**
-   * Encontra o banco de horas de um funcionário. Cria um se não existir.
-   */
   async findByFuncionario(funcionarioId: number): Promise<BancoHoras> {
     const funcionario = await this.funcionariosService.findOne(funcionarioId);
     let bancoHoras = await this.bancoHorasRepository.findOne({ where: { funcionario_id: funcionarioId } });
@@ -35,11 +32,7 @@ constructor(
     return bancoHoras;
   }
 
-  /**
-   * ATENÇÃO: Este é um método de exemplo com a lógica principal.
-   * Uma implementação real exigiria um tratamento mais robusto de casos de uso
-   * (ex: feriados, ausências, batidas ímpares, etc.).
-   */
+  
   async calcularEAtualizar(funcionarioId: number, dataInicio: Date, dataFim: Date): Promise<BancoHoras> {
     const horariosTrabalho = await this.horarioTrabalhoService.findAllByFuncionario(funcionarioId);
     const registrosPonto = await this.registroPontoService.findAllByFuncionario(funcionarioId);
