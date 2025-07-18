@@ -8,9 +8,13 @@ export class CreateHorarioTrabalhoDTO{
   @IsNotEmpty({ message: 'O dia da semana é obrigatório.' })
   dia_semana: number;
 
-  @Matches(/^([01]\d|2[0-3]):([0-5]\d)$/, { message: 'A hora de início deve estar no formato HH:MM.'})
+  @Matches(/^([01]\d|2[3]):([0-5]\d)$/, { message: 'A hora de início deve estar no formato HH:MM.'})
   @IsNotEmpty({ message: 'A hora de início é obrigatória.' })
-  hora_inicio: string;
+  horario_inicio: string; 
+  
+  @Matches(/^([01]\d|2[0-3]):([0-5]\d)$/, { message: 'A hora de fim deve estar no formato HH:MM.'})
+  @IsNotEmpty({ message: 'A hora de fim é obrigatória.' })
+  horario_fim: string;
   
   @IsInt()
   @IsNotEmpty({ message: 'O ID do funcionário é obrigatório.' })
