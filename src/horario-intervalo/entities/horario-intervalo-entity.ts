@@ -1,14 +1,14 @@
-import { Entity, PrimaryColumn, Column, ManyToOne, JoinColumn,  } from "typeorm";
+import { Entity, PrimaryColumn, Column, ManyToOne, JoinColumn, PrimaryGeneratedColumn,  } from "typeorm";
 import{ Funcionario} from "../../funcionarios/entities/funcionario.entity";
 
 @Entity('horario_intervalo')
 export class HorarioIntervalo{
 
-    @PrimaryColumn()
+    @PrimaryGeneratedColumn()
     id: number;
 
     @Column({ type: 'time'})
-    incio_intervalo: string
+    inicio_intervalo: string
 
     @Column({ type: 'time'})
     fim_intervalo: string
