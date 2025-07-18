@@ -53,10 +53,10 @@ export class RelatoriosService {
         };
     }
  async gerarEspelhoPontoPDF(funcionarioId: number, ano: number, mes: number): Promise<Buffer> {
-        // 1. Reutiliza o método anterior para obter todos os dados
+        
         const dadosRelatorio = await this.gerarEspelhoPonto(funcionarioId, ano, mes);
 
-        // 2. Cria o conteúdo HTML a partir dos dados
+      
         const htmlContent = this.criarHtmlParaRelatorio(dadosRelatorio);
 
         // 3. Usa o Puppeteer para converter o HTML em PDF
@@ -80,11 +80,11 @@ export class RelatoriosService {
 
 
 
-    // --- FUNÇÃO AUXILIAR PARA GERAR O HTML ---
+    // ---  PARA GERAR O HTML ---
     private criarHtmlParaRelatorio(data: any): string {
         const { funcionario, periodo, registros, saldo_banco_horas_minutos } = data;
         
-        // Formata as linhas da tabela de registros
+       
         const linhasRegistros = registros.map(reg => 
             `<tr>
                 <td>${new Date(reg.registro).toLocaleDateString('pt-BR')}</td>
@@ -93,12 +93,12 @@ export class RelatoriosService {
             </tr>`
         ).join('');
 
-        // Formata o saldo de horas
+        
         const horas = Math.floor(Math.abs(saldo_banco_horas_minutos) / 60);
         const minutos = Math.abs(saldo_banco_horas_minutos) % 60;
         const saldoFormatado = `${saldo_banco_horas_minutos < 0 ? '-' : ''}${String(horas).padStart(2, '0')}:${String(minutos).padStart(2, '0')}`;
 
-        // Template HTML (você pode deixar isso muito mais bonito com CSS)
+        
         return `
             <!DOCTYPE html>
             <html>

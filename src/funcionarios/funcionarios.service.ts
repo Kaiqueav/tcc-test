@@ -30,7 +30,7 @@ export class FuncionariosService {
   }
 
   async update(id: number, updateFuncionarioDto: UpdateFuncionarioDto): Promise<Funcionario> {
-    const funcionario = await this.findOne(id); // Check if exists
+    const funcionario = await this.findOne(id); // checa se essa prr existe
     this.funcionarioRepository.merge(funcionario, updateFuncionarioDto);
     return this.funcionarioRepository.save(funcionario);
   }

@@ -29,7 +29,7 @@ export class FuncionariosController {
   }
 
   @Delete(':id')
-  @HttpCode(HttpStatus.NO_CONTENT) // 204 No Content for successful deletion
+  @HttpCode(HttpStatus.NO_CONTENT) 
   remove(@Param('id') id: string) {
     return this.funcionariosService.remove(+id);
   }

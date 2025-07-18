@@ -13,7 +13,7 @@ export class RegistroPontoService {
         private readonly funcionariosService: FuncionariosService ){}
 
         async create(createRegistroPontoDto: CreateRegistroPontoDto): Promise<RegistroPonto> {
-    // Internal Communication: Check if the employee exists before creating a time record
+   
             const funcionarioExists = await this.funcionariosService.exists(createRegistroPontoDto.funcionarioId);
             if (!funcionarioExists) {
             throw new BadRequestException(`Funcionario with ID "${createRegistroPontoDto.funcionarioId}" not found.`);
