@@ -78,6 +78,8 @@ export class RelatoriosService {
         return  Buffer.from(pdfBuffer);
     }
 
+
+
     // --- FUNÇÃO AUXILIAR PARA GERAR O HTML ---
     private criarHtmlParaRelatorio(data: any): string {
         const { funcionario, periodo, registros, saldo_banco_horas_minutos } = data;
