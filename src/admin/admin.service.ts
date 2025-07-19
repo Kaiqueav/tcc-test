@@ -3,26 +3,26 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateAdminDto } from './dto/create-admin.dto';
 import * as bcrypt from 'bcrypt';
-import { Adm } from './entities/admin.entity';
+import { Admin } from './entities/admin.entity';
 
 @Injectable()
-export class AdmService {
+export class AdminService {
     constructor( 
-        @InjectRepository(Adm)
-        private readonly admRepository:Repository<Adm>,
+        @InjectRepository(Admin)
+        private readonly adminRepository:Repository<Admin>,
     ){}
 
-    async createAdmin(createAdminDto: CreateAdminDto): Promise<Adm>{
+    async createAdmin(createAdminDto: CreateAdminDto): Promise<Admin>{
             const saltRound = 10;
             const hashedPassword = await bcrypt.hash(createAdminDto.password, saltRound);
 
-            const newAdmin = new Adm();
+            const newAdmin = new Admin();
             newAdmin.email = createAdminDto.email;
             newAdmin.password = hashedPassword
 
-            return this.admRepository.save(newAdmin)
+            return this.adminRepository.save(newAdmin)
     }   
-     async findOneByEmail(email: string): Promise<Adm| undefined> {
-        return this.admRepository.findOne({ where: { email } });
+     async findOneByEmail(email: string): Promise<Admin| undefined> {
+        return this.adminRepository.findOne({ where: { email } });
     }
 }
