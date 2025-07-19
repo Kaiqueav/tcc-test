@@ -1,12 +1,12 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity('admin')
-export class Admin{
+@Entity('adm')
+export class Adm{
     @PrimaryGeneratedColumn()
         id: number;
     @Column({unique: true})
         email:string;
     @Column()
-        senha: string
+        password: string
 
 }
