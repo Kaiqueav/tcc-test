@@ -13,7 +13,7 @@ import { HorarioTrabalhoModule } from 'src/horario-trabalho/horario-trabalho.mod
     FuncionariosModule,
     RegistroPontoModule,
     HorarioTrabalhoModule,
-    
+        
   ],
   controllers: [BancoHorasController],
   providers: [BancoHorasService],

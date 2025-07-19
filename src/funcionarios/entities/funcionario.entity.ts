@@ -4,8 +4,7 @@ import { HorarioIntervalo } from '../../horario-intervalo/entities/horario-inter
 import { HorarioTrabalho } from "src/horario-trabalho/entities/horario-trabalho.entity";
 import { BancoHoras } from "src/banco-horas/entities/banco-horas.entity";
 import { Relatorio } from "src/relatorios/entities/relatorio.entity";
-//import { BancoHoras } from '../banco-horas/banco-horas.entity';
-//import { Relatorio } from '../relatorio/relatorio.entity';
+
 
 @Entity('funcionario')
  export class Funcionario {
@@ -32,6 +31,7 @@ import { Relatorio } from "src/relatorios/entities/relatorio.entity";
     @Column({ length: 100 })
     cargo: string;
 
+  
   // Relationships
   @OneToMany(() => RegistroPonto, (registroPonto) => registroPonto.funcionario)
   registrosPonto: RegistroPonto[];
