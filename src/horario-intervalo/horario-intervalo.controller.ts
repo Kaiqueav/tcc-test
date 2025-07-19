@@ -1,8 +1,11 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Patch, Post, UseGuards } from '@nestjs/common';
 import { HorarioIntervaloService } from './horario-intervalo.service';
 import { CreateHorarioIntervaloDto } from './dto/create-horario-intervalo.dto';
 import { UpdateHorarioIntervaloDto } from './dto/update-horario-intervalo.dto';
+import { AuthGuard } from '@nestjs/passport';
+import { AdminGuard } from 'src/auth/admin.guard';
 
+@UseGuards(AuthGuard('jwt'), AdminGuard)
 @Controller('horario-intervalo')
 export class HorarioIntervaloController {
     constructor ( private readonly horarioIntervaloService: HorarioIntervaloService){}

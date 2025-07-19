@@ -1,7 +1,11 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Post, UseGuards } from '@nestjs/common';
 import { BancoHoras } from './entities/banco-horas.entity';
 import { BancoHorasService } from './banco-horas.service';
+import { AuthGuard } from '@nestjs/passport';
+import { AdminGuard } from 'src/auth/admin.guard';
 
+
+@UseGuards(AuthGuard('jwt'), AdminGuard)
 @Controller('banco-horas')
 export class BancoHorasController {
 
