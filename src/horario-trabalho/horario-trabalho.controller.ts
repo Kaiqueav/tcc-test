@@ -1,8 +1,13 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Patch, Post, UseGuards } from '@nestjs/common';
 import { HorarioTrabalhoService } from './horario-trabalho.service';
 import { CreateHorarioTrabalhoDTO } from './dto/create-horario-trabalho.dto';
 import { UpdateHorarioTrabalhoDTO } from './dto/update-horario-trabalho.dto';
+import { AuthGuard } from '@nestjs/passport';
+import { AdminGuard } from 'src/auth/admin.guard';
 
+
+
+@UseGuards(AuthGuard('jwt'), AdminGuard)
 @Controller('horario-trabalho')
 export class HorarioTrabalhoController {
      constructor(private readonly horarioTrabalhoService: HorarioTrabalhoService) {}

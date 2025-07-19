@@ -11,6 +11,8 @@ import { HorarioTrabalhoModule } from './horario-trabalho/horario-trabalho.modul
 import { BancoHorasModule } from './banco-horas/banco-horas.module';
 import { RelatoriosModule } from './relatorios/relatorios.module';
 import { HorarioTrabalhoController } from './horario-trabalho/horario-trabalho.controller';
+import { AuthModule } from './auth/auth.module';
+import { AdminModule } from './admin/admin.module';
 
 @Module({
   imports: [
@@ -29,7 +31,9 @@ import { HorarioTrabalhoController } from './horario-trabalho/horario-trabalho.c
     HorarioIntervaloModule,
     HorarioTrabalhoModule,
     BancoHorasModule,
-    RelatoriosModule
+    RelatoriosModule,
+    AuthModule,
+    AdminModule
   ],
   controllers: [AppController, FuncionariosController, HorarioTrabalhoController],
   providers: [AppService, FuncionariosService],
