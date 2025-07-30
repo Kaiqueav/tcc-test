@@ -5,7 +5,7 @@ import { Admin } from './entities/admin.entity';
 import { AuthGuard } from '@nestjs/passport';
 import { AdminGuard } from 'src/auth/admin.guard';
 
-@UseGuards(AuthGuard('jwt'), AdminGuard) // Protege todas as rotas
+//@UseGuards(AuthGuard('jwt'), AdminGuard) // Protege todas as rotas
 @Controller('admin')
 export class AdminController {
 
