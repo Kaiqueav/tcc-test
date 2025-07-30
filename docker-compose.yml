@@ -1,17 +1,42 @@
+# docker-compose.yml
+
 services:
+  backend:
+    build: .
+    container_name: my-backend-app
+    # ADICIONE A LINHA ABAIXO
+    command: sh -c "sleep 15 && npm run start:dev"
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      mysql_db:
+        condition: service_healthy
+    restart: always
+
   mysql_db:
-    image: mysql:8.0 
+    # (o resto do arquivo permanece o mesmo)
+    image: mysql:8.0
     container_name: my-mysql-db
+    command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: your_mysql_password 
-      MYSQL_DATABASE: controle_ponto 
-      MYSQL_USER: myuser 
-      MYSQL_PASSWORD: mypassword 
+      MYSQL_ROOT_PASSWORD: your_mysql_password
+      MYSQL_DATABASE: controle_ponto
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: minhapassword
     ports:
-      - "3306:3306" 
+      - "3306:3306"
     volumes:
-      - mysql_data:/var/lib/mysql 
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
 
 volumes:
   mysql_data:
