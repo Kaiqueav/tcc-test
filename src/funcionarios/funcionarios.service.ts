@@ -28,6 +28,14 @@ export class FuncionariosService {
     }
     return funcionario;
   }
+   async findOneByCpf(cpf: string): Promise<Funcionario> {
+        const funcionario = await this.funcionarioRepository.findOne({ where: { cpf } });
+        if (!funcionario) {
+      throw new NotFoundException(`Funcionario com o cpf "${cpf}" não encontrado.`);
+         // return null;
+        }
+        return funcionario;
+    }
 
   async update(id: number, updateFuncionarioDto: UpdateFuncionarioDto): Promise<Funcionario> {
     const funcionario = await this.findOne(id); // checa se essa prr existe
