@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Patch, Post, Request } from '@nestjs/common';
+import { Body, Controller, Delete, ForbiddenException, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Patch, Post, Request } from '@nestjs/common';
 import { RegistroPontoService } from './registro-ponto.service';
 import { CreateRegistroPontoDto } from './dto/create-registro-ponto.dto';
 import { RegistroPonto } from './entities/registro-ponto-entity';
@@ -12,11 +12,30 @@ export class RegistroPontoController {
 
     @Post()
     @HttpCode(HttpStatus.CREATED)
-    create(@Body() createRegistroPontoDto : CreateRegistroPontoDto, @Request() req: any): Promise<RegistroPonto>
-    {
-        const funcionarioId = req.user.userId;
+    create(@Body() createRegistroPontoDto: CreateRegistroPontoDto, @Request() req): Promise<RegistroPonto> {
+        const user = req.user;
+
+        if (!user) {
+            throw new ForbiddenException('Acesso negado.');
+        }
+
+        let funcionarioId: number;
+
+        // Se o utilizador for um admin, usa o ID enviado no corpo da requisição.
+        if (user.role === 'admin') {
+            if (!createRegistroPontoDto.funcionarioId) {
+                throw new ForbiddenException('O ID do funcionário é obrigatório para administradores.');
+            }
+            funcionarioId = createRegistroPontoDto.funcionarioId;
+        } 
+        // Se for um funcionário, usa o seu próprio ID do token.
+        else {
+            funcionarioId = user.userId;
+        }
+
         return this.registroPontoService.create(createRegistroPontoDto, funcionarioId);
     }
+    
 // Listar todos os registros ROTA: /registro-ponto
     @Get()
     @HttpCode(HttpStatus.OK)

@@ -12,19 +12,19 @@ export class RegistroPontoService {
         private readonly registroPontoRepository:Repository <RegistroPonto>,
         private readonly funcionariosService: FuncionariosService ){}
 
-        async create(createRegistroPontoDto: CreateRegistroPontoDto, funcionarioId: number): Promise<RegistroPonto> {
-            createRegistroPontoDto.funcionarioId = funcionarioId;
-            const funcionarioExists = await this.funcionariosService.exists(createRegistroPontoDto.funcionarioId);
-            if (!funcionarioExists) {
-            throw new BadRequestException(`Funcionario with ID "${createRegistroPontoDto.funcionarioId}" not found.`);
-            }
-
-            const registroPonto = this.registroPontoRepository.create({
-            ...createRegistroPontoDto,
-            registro: new Date(createRegistroPontoDto.registro), // Convert string to Date object
-            });
-            return this.registroPontoRepository.save(registroPonto);
+  async create(createRegistroPontoDto: CreateRegistroPontoDto, funcionarioId: number): Promise<RegistroPonto> {
+        const funcionarioExists = await this.funcionariosService.exists(funcionarioId);
+        if (!funcionarioExists) {
+            throw new BadRequestException(`Funcionário com ID "${funcionarioId}" não encontrado.`);
         }
+
+        const registroPonto = this.registroPontoRepository.create({
+            ...createRegistroPontoDto,
+            funcionarioId: funcionarioId, // Garante que o ID correto é usado
+            registro: new Date(createRegistroPontoDto.registro),
+        });
+        return this.registroPontoRepository.save(registroPonto);
+    }
         async findAll(): Promise<RegistroPonto[]>{
             return this.registroPontoRepository.find({
                 relations: ['funcionario'],
