@@ -59,11 +59,14 @@ export class RelatoriosService {
       
         const htmlContent = this.criarHtmlParaRelatorio(dadosRelatorio);
 
-        // 3. Usa o Puppeteer para converter o HTML em PDF
+     
         const browser = await puppeteer.launch({ 
             headless: true,
-            args: ['--no-sandbox', '--disable-setuid-sandbox'] // Necessário para rodar em alguns ambientes (ex: Docker)
+            executablePath: '/usr/bin/chromium-browser',
+            args: ['--no-sandbox', '--disable-setuid-sandbox']
+             // Necessário para rodar em alguns ambientes (ex: Docker)
         });
+
         const page = await browser.newPage();
         await page.setContent(htmlContent, { waitUntil: 'networkidle0' });
 
