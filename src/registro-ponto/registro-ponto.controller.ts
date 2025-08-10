@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Patch, Post, Request } from '@nestjs/common';
 import { RegistroPontoService } from './registro-ponto.service';
 import { CreateRegistroPontoDto } from './dto/create-registro-ponto.dto';
 import { RegistroPonto } from './entities/registro-ponto-entity';
@@ -12,9 +12,10 @@ export class RegistroPontoController {
 
     @Post()
     @HttpCode(HttpStatus.CREATED)
-    create(@Body() createRegistroPontoDto : CreateRegistroPontoDto): Promise<RegistroPonto>
+    create(@Body() createRegistroPontoDto : CreateRegistroPontoDto, @Request() req: any): Promise<RegistroPonto>
     {
-        return this.registroPontoService.create(createRegistroPontoDto);
+        const funcionarioId = req.user.userId;
+        return this.registroPontoService.create(createRegistroPontoDto, funcionarioId);
     }
 // Listar todos os registros ROTA: /registro-ponto
     @Get()

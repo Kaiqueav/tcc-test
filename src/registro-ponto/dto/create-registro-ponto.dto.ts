@@ -1,7 +1,7 @@
-import { IsNotEmpty, IsNumber, IsDateString, IsIn, IsString } from "class-validator";
+import { IsNotEmpty, IsNumber, IsDateString, IsIn, IsString, IsOptional } from "class-validator";
 
 export class CreateRegistroPontoDto{
-    @IsNotEmpty()
+    @IsOptional()
     @IsNumber()
     funcionarioId: number;
     
