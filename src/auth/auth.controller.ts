@@ -1,6 +1,7 @@
 import { Body, Controller, Post, UnauthorizedException } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
+import { LoginPontoDto } from './dto/login-ponto.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -14,4 +15,12 @@ export class AuthController {
     }
     return this.authService.login(user);
   }
+  @Post('ponto/login')
+    async loginPonto(@Body() loginPontoDto: LoginPontoDto) {
+        const funcionario = await this.authService.validateFuncionario(loginPontoDto.cpf);
+        if (!funcionario) {
+            throw new UnauthorizedException('CPF não encontrado ou inválido.');
+        }
+        return this.authService.loginPonto(funcionario);
+    }
 }
