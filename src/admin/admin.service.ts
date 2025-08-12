@@ -25,4 +25,7 @@ export class AdminService {
      async findOneByEmail(email: string): Promise<Admin| undefined> {
         return this.adminRepository.findOne({ where: { email } });
     }
+     async findOneById(id: number): Promise<Admin | undefined> {
+        return this.adminRepository.findOne({ where: { id } });
+    }
 }
