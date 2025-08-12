@@ -31,14 +31,13 @@ export class RelatoriosService {
             return dataRegistro.getFullYear() === ano && dataRegistro.getMonth() + 1 === mes;
         });
 
-        // 2. Logar a geração do relatório
+ 
         const logRelatorio = this.relatorioRepository.create({
             tipo_relatorio: `espelho_ponto_${ano}_${mes}`,
             funcionario_id: funcionarioId,
         });
         await this.relatorioRepository.save(logRelatorio);
 
-        // 3. Montar o objeto de resposta do relatório
         return {
             gerado_em: new Date(),
             funcionario: {
@@ -66,11 +65,11 @@ export class RelatoriosService {
             args: [
                 '--no-sandbox',
                 '--disable-setuid-sandbox',
-                '--disable-dev-shm-usage', // Super importante para evitar erros de memória partilhada no Docker
-                '--disable-gpu', // Desativa a aceleração por hardware, que não existe no contentor
+                '--disable-dev-shm-usage', 
+                '--disable-gpu', 
                 '--window-size=1024,768'
             ],
-            // Aumenta o tempo limite de comunicação para 1 minuto
+            
             protocolTimeout: 60000 
         });
 
@@ -92,7 +91,7 @@ export class RelatoriosService {
 
 
 
-    // ---  PARA GERAR O HTML ---
+    //  PARA GERAR O HTML
     private criarHtmlParaRelatorio(data: any): string {
         const { funcionario, periodo, registros, saldo_banco_horas_minutos } = data;
         
