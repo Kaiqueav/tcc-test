@@ -1,18 +1,26 @@
-import { Body, Controller, Delete, ForbiddenException, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Patch, Post, Request } from '@nestjs/common';
+import { Body, Controller, Delete, ForbiddenException, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Patch, Post, Request, UseGuards } from '@nestjs/common';
 import { RegistroPontoService } from './registro-ponto.service';
 import { CreateRegistroPontoDto } from './dto/create-registro-ponto.dto';
 import { RegistroPonto } from './entities/registro-ponto-entity';
 import { UpdateFuncionarioDto } from 'src/funcionarios/dto/update-funcionario.dto';
 import { UpdateRegistroPontoDto } from './dto/update-registro-ponto';
+import { AuthGuard } from '@nestjs/passport';
+import { JwtAuthGuard } from 'src/auth/jwt-auth-guard';
 
 @Controller('registro-ponto')
 export class RegistroPontoController {
     constructor( private readonly registroPontoService : RegistroPontoService ){}
 // rota de criação: POST/ registro-ponto
-
     @Post()
+    @UseGuards(JwtAuthGuard)
     @HttpCode(HttpStatus.CREATED)
     create(@Body() createRegistroPontoDto: CreateRegistroPontoDto, @Request() req): Promise<RegistroPonto> {
+        
+        // --- DEBUG ---
+        console.log('=============== RegistroPonto Controller ===============');
+        console.log('Objeto req.user:', req.user);
+        console.log('======================================================');
+        // --- FIM DO DEBUG ---
         const user = req.user;
 
         if (!user) {
@@ -35,6 +43,8 @@ export class RegistroPontoController {
 
         return this.registroPontoService.create(createRegistroPontoDto, funcionarioId);
     }
+
+    
     
 // Listar todos os registros ROTA: /registro-ponto
     @Get()
