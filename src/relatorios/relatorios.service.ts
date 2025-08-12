@@ -55,17 +55,26 @@ export class RelatoriosService {
  async gerarEspelhoPontoPDF(funcionarioId: number, ano: number, mes: number): Promise<Buffer> {
         
         const dadosRelatorio = await this.gerarEspelhoPonto(funcionarioId, ano, mes);
-
-      
         const htmlContent = this.criarHtmlParaRelatorio(dadosRelatorio);
 
-     
+        console.log("--- [PUPPETEER DEBUG] --- A tentar iniciar o browser...");
+
         const browser = await puppeteer.launch({ 
             headless: true,
-            executablePath: '/usr/bin/chromium-browser',
-            args: ['--no-sandbox', '--disable-setuid-sandbox']
-             // Necessário para rodar em alguns ambientes (ex: Docker)
+            executablePath: '/usr/bin/chromium',
+            // Argumentos otimizados para ambientes Docker/CI
+            args: [
+                '--no-sandbox',
+                '--disable-setuid-sandbox',
+                '--disable-dev-shm-usage', // Super importante para evitar erros de memória partilhada no Docker
+                '--disable-gpu', // Desativa a aceleração por hardware, que não existe no contentor
+                '--window-size=1024,768'
+            ],
+            // Aumenta o tempo limite de comunicação para 1 minuto
+            protocolTimeout: 60000 
         });
+
+        console.log("--- [PUPPETEER DEBUG] --- Browser iniciado com sucesso!");
 
         const page = await browser.newPage();
         await page.setContent(htmlContent, { waitUntil: 'networkidle0' });
@@ -78,7 +87,7 @@ export class RelatoriosService {
 
         await browser.close();
         
-        return  Buffer.from(pdfBuffer);
+        return Buffer.from(pdfBuffer);
     }
 
 
