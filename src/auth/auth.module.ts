@@ -15,20 +15,25 @@ import { FuncionariosModule } from 'src/funcionarios/funcionarios.module';
       isGlobal: true
     }),
     AdminModule, 
-    PassportModule,
+    PassportModule.register({ defaultStrategy: 'jwt' }),
     FuncionariosModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: (configService: ConfigService) => ({
-        
-        secret: configService.get<string>('JWT_SECRET'),
-        signOptions: { expiresIn: '8h' }, 
-      }),
+     useFactory: (configService: ConfigService) => {
+        const secret = configService.get<string>('JWT_SECRET');
+        // --- LOG DE DEBUG ---
+        console.log('[AuthModule] Chave usada para ASSINAR tokens:', secret);
+        // --- FIM DO LOG ---
+        return {
+          secret: secret,
+          signOptions: { expiresIn: '8h' }, 
+        } 
+      },
     }),
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy],
-  exports: [AuthService],
+  exports: [AuthService, PassportModule],
 })
 export class AuthModule {}
