@@ -1,9 +1,21 @@
 # Dockerfile
 
-# Usa uma imagem base do Node.js
-FROM node:18-alpine
+# Passo 1: Usar uma imagem base Debian (slim) que é mais compatível com o Puppeteer
+FROM node:18-slim
 
-RUN apk add --no-cache chromium nss freetype harfbuzz ca-certificates ttf-freefont
+# Passo 2: Instalar as dependências necessárias para o Chromium em Debian
+# Fonte: Documentação oficial do Puppeteer
+RUN apt-get update \
+    && apt-get install -yq --no-install-recommends \
+    chromium \
+    fonts-ipafont-gothic \
+    fonts-wqy-zenhei \
+    fonts-thai-tlwg \
+    fonts-kacst \
+    fonts-freefont-ttf \
+    libxss1 \
+    --fix-missing
+
 # Define o diretório de trabalho dentro do contêiner
 WORKDIR /usr/src/app
 
