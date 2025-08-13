@@ -82,8 +82,9 @@ Para executar a solução completa, você precisará ter o backend (API) e o fro
 
 1.  **Clone o repositório do frontend em uma pasta separada:**
     ```bash
-    git clone [https://github.com/Kaiqueav/Software.git](https://github.com/Kaiqueav/Software.git)
-    cd Software
+    git clone [https://github.com/Kaiqueav/ponto-cloud-front.git]
+    (https://github.com/Kaiqueav/ponto-cloud-front.git)
+    cd ponto-cloud-front
     ```
 
 2.  **Verifique a URL da API:**
